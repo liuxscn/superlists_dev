@@ -43,6 +43,7 @@ class NewVisitorTest(unittest.TestCase):
         #     any(row.text == '1: Buy peacock feathers' for row in rows),
         #     f"New to-do item didn't appear in table. Contents were:\n{table.text}"
         # )
+        time.sleep(5)
         self.fail('Finished')
 
 
