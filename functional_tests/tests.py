@@ -1,4 +1,5 @@
-from django.test import LiveServerTestCase
+# from django.test import LiveServerTestCase
+from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from selenium.common.exceptions import WebDriverException
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
@@ -8,7 +9,7 @@ import unittest
 MAX_WAIT = 10
 
 
-class NewVisitorTest(LiveServerTestCase):
+class NewVisitorTest(StaticLiveServerTestCase):
     def setUp(self):
         self.browser = webdriver.Firefox()
 
@@ -55,7 +56,7 @@ class NewVisitorTest(LiveServerTestCase):
         self.wait_for_row_in_list_table('2: Use peacock feathers to make a fly')
         self.wait_for_row_in_list_table('1: Buy peacock feathers')
 
-        self.fail('Finished')
+        # self.fail('Finished')
 
     def test_multiple_users_can_start_list_at_different_urls(self):
         self.browser.get(self.live_server_url)
