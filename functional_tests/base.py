@@ -5,12 +5,13 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import time
 import unittest
+from unittest import skip
 import os
 
 MAX_WAIT = 10
 
 
-class NewVisitorTest(StaticLiveServerTestCase):
+class FunctionalTest(StaticLiveServerTestCase):
     def setUp(self):
         self.browser = webdriver.Firefox()
         staging_server = os.environ.get('STAGING_SERVER')
@@ -38,6 +39,7 @@ class NewVisitorTest(StaticLiveServerTestCase):
         rows = table.find_elements_by_tag_name('tr')
         self.assertIn(row_text, [row.text for row in rows])
 
+class NewVisitorTest(FunctionalTest):
     def test_can_start_a_list_for_one_user(self):
         self.browser.get(self.live_server_url)
         self.assertIn('To-Do', self.browser.title)
@@ -95,6 +97,7 @@ class NewVisitorTest(StaticLiveServerTestCase):
         self.assertIn('Buy milk', page_text)
 
 
+class LayoutAndStylingTest(FunctionalTest):
     def test_layout_and_styling(self):
         # edith visit home page
         self.browser.get(self.live_server_url)
@@ -117,4 +120,21 @@ class NewVisitorTest(StaticLiveServerTestCase):
             512,
             delta=10
         )
+
+
+class ItemValidationTest(FunctionalTest):
+    @skip
+    def test_cannot_add_empty_list_items(self):
+        # input empty and return error msg
+
+        # input valid and done
+
+        # input empty again
+
+        # input valid then ok
+
+        self.fail('write me')
+
+
+
 
