@@ -19,7 +19,7 @@ def view_list(request, list_id):
         try:
             # 此处不能使用 Item.objects.create(...) ，否则item直接在数据库中保存，不需要经过.save()函数
             # item = Item.objects.create(text=request.POST['item_text'], list=list_)
-            item = Item(text=request.POST['item_text'], list=list_)
+            item = Item(text=request.POST['text'], list=list_)
             item.full_clean()
             item.save()
             return redirect(list_)
@@ -34,7 +34,7 @@ def view_list(request, list_id):
 
 def new_list(request):
     list_ = List.objects.create()
-    item = Item.objects.create(text=request.POST['item_text'], list=list_)
+    item = Item.objects.create(text=request.POST['text'], list=list_)
     try:
         item.full_clean()
         item.save()
