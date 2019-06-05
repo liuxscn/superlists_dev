@@ -16,6 +16,8 @@ from unittest import skip
 class HomePageTest(TestCase):
 
     def test_uses_home_template(self):
+        # 测试中返回的 response 是<class 'django.http.response.HttpResponse'> 的对象
+        # 如 <HttpResponse status_code=200, "text/html; charset=utf-8">
         response = self.client.get('/')
         self.assertContains(response, 'To-Do')
         self.assertTemplateUsed(response, 'home.html')
@@ -32,7 +34,7 @@ class ListViewTest(TestCase):
         response = self.client.get(f'/lists/{list_.id}/')
         self.assertTemplateUsed(response, 'list.html')
 
-    def test_display_all_lists_items(self):
+    def test_display_only_items_for_that_list(self):
         correct_list_ = List.objects.create()
         Item.objects.create(text='itemey 1', list=correct_list_)
         Item.objects.create(text='itemey 2', list=correct_list_)
@@ -82,6 +84,7 @@ class ListViewTest(TestCase):
         list_ = List.objects.create()
         response = self.client.get(f'/lists/{list_.id}/')
         self.assertIsInstance(response.context['form'], ExistingListItemForm)
+        self.fail(type(response))
         self.assertContains(response, 'name="text"')
 
     # def test_validation_errors_end_up_on_lists_page(self):
