@@ -18,6 +18,7 @@ class LoginTest(FunctionalTest):
         # 出现一条信息，提醒用户邮件已发出
         self.wait_for(lambda: self.assertIn(
             'Check your email',
+            # 下一行输出的数据类似 'Superlists\nEnter email to log in:\nStart a new To-Do list'
             self.browser.find_element_by_tag_name('body').text
         ))
 
