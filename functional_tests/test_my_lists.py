@@ -25,3 +25,13 @@ class MyListTest(FunctionalTest):
             )
         )
 
+    def test_logged_in_user_lists_are_saved_as_my_lists(self):
+        email = 'emlliuxiang@163.com'
+        self.browser.get(self.live_server_url)
+        self.wait_to_be_logged_out(email)
+
+        # 已是登录用户
+        self.create_pre_authenticated_session(email)
+        self.browser.get(self.live_server_url)
+        self.wait_to_be_logged_in(email)
+

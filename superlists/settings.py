@@ -128,6 +128,14 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.abspath(os.path.join(BASE_DIR, '../static'))
 
+EMAIL_HOST = 'smtp.126.com'
+EMAIL_HOST_USER = 'emlliuxiang@126.com'
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASSWORD')
+EMAIL_PORT = 25
+# 这里需要使用 SMTP 25端口
+# EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
